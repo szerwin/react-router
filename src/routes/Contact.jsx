@@ -1,4 +1,4 @@
-
+// ejemplos de formularios con booptraps
 
 export const Contact = () => {
   return (
