@@ -1,40 +1,36 @@
+import { useContext } from "react";
+import { UsuarioContext } from '../context/UsuarioProvider';
 
 export const Home = () => {
-  return (
-   <>
-   <div>
-   <table className="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Web</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colSpan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-   </div>
-  
+  const { usuarios } = useContext(UsuarioContext);
 
-   </>
-  )
-}
+  // Asegurarse de que `usuarios` sea un array antes de llamar a `map`
+  if (!Array.isArray(usuarios)) {
+    return <p>Error: Los usuarios no son un array válido.</p>;
+  }
+
+  return (
+    <div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Tecnología</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usuarios.map((usuario, index) => (
+            <tr key={index}>
+              <th>{index + 1}</th>
+              <td>{usuario.nombre}</td>
+              <td>{usuario.tecnologia}</td>
+              <td>{usuario.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
